@@ -1,7 +1,7 @@
 {% extends 'pages/base.html' %}
 {% block head_title %}Twitter{% endblock head_title%}
 {% block content %}
-<h1>Hola Mundo</h1>
+<h3>Django Javascript </h3>
 <div id="tweetsElement">
     Loading
 </div>
@@ -26,7 +26,7 @@ xhr.onload = function(){
     for( i = 0 ; i < listItems.length; i++){
         console.log(i);
         console.log(listItems[i]);
-        let currentItem = '<div class="mb-4"><h1>' + listItems[i].id +'</h1><p>'+ listItems[i].content+'</p></div>'
+        let currentItem = '<div class="mb-4"><h2>' + listItems[i].id +'</h2><p>'+ listItems[i].content+'</p></div>'
         finalTweetStr += currentItem 
     }
     tweetsElement.innerHTML = finalTweetStr
