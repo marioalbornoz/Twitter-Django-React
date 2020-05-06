@@ -2,9 +2,14 @@
 {% block head_title %}Twitter{% endblock head_title%}
 {% block content %}
 <h1>Hola Mundo</h1>
-
-
+<div id="tweetsElement">
+    Loading
+</div>
 <script> 
+
+    // const tweet = document.getElementById("tweet")
+    // tweet.innerHTML = "Nuevos Tweets"
+
 const xhr = new XMLHttpRequest()
 const method = 'GET'
 const url = '/tweets'
@@ -16,6 +21,15 @@ xhr.onload = function(){
     const serverResponse = xhr.response
     var listItems = serverResponse.response
     console.log(listItems)
+    let finalTweetStr = ""
+    let i;
+    for( i = 0 ; i < listItems.length; i++){
+        console.log(i);
+        console.log(listItems[i]);
+        let currentItem = '<div class="mb-4"><h1>' + listItems[i].id +'</h1><p>'+ listItems[i].content+'</p></div>'
+        finalTweetStr += currentItem 
+    }
+    tweetsElement.innerHTML = finalTweetStr
 }
 xhr.send()
 
