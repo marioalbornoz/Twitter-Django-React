@@ -1,1 +1,23 @@
-<h2>Hello World</h1>
+{% extends 'pages/base.html' %}
+{% block head_title %}Twitter{% endblock head_title%}
+{% block content %}
+<h1>Hola Mundo</h1>
+
+
+<script> 
+const xhr = new XMLHttpRequest()
+const method = 'GET'
+const url = '/tweets'
+const responseType = 'json'
+
+xhr.responseType = responseType
+xhr.open(method, url)
+xhr.onload = function(){
+    const serverResponse = xhr.response
+    var listItems = serverResponse.response
+    console.log(listItems)
+}
+xhr.send()
+
+</script>
+{% endblock %}
