@@ -1,12 +1,16 @@
 {% extends 'pages/base.html' %}
 {% block head_title %}Twitter{% endblock head_title%}
 {% block content %}
-<h3>Django Javascript </h3>
-<div id="tweetsElement">
-    Loading
-</div>
-<script> 
+<div class="row text-center">
+    <div class="col">
+        <h3>Django Javascript </h3>
+        <div id="tweetsElement">
+            Loading
+        </div>
+    </div>
+</div >
 
+<script>
     // const tweet = document.getElementById("tweet")
     // tweet.innerHTML = "Nuevos Tweets"
 
@@ -14,6 +18,24 @@ const xhr = new XMLHttpRequest()
 const method = 'GET'
 const url = '/tweets'
 const responseType = 'json'
+
+function likeCount(tweet_id, currentCount){
+    console.log(tweet_id, currentCount);
+    
+}
+
+function likeBtn(tweet){
+    return "<button class='btn btn-primary btn-sm' onclick=likeCount(" +
+    tweet.id+ "," + tweet.likes + ")>"+tweet.likes +" Likes</button>";
+}
+
+function formatTweetElement(tweet){
+    var formatTweet = '<div class="mb-4"><h2>' 
+    + tweet.id +'</h2><p>'
+    + tweet.content+'</p>'
+    + '<div class="btn-group">'+likeBtn(tweet)+'</div></div>'
+    return formatTweet;
+}
 
 xhr.responseType = responseType
 xhr.open(method, url)
@@ -26,7 +48,8 @@ xhr.onload = function(){
     for( i = 0 ; i < listItems.length; i++){
         console.log(i);
         console.log(listItems[i]);
-        let currentItem = '<div class="mb-4"><h2>' + listItems[i].id +'</h2><p>'+ listItems[i].content+'</p></div>'
+        tweetObj = listItems[i]
+        let currentItem = formatTweetElement(tweetObj)
         finalTweetStr += currentItem 
     }
     tweetsElement.innerHTML = finalTweetStr
